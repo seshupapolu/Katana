@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Web;
+using System.Web.Http;
 
 namespace KatanaImplementation
 {
@@ -60,10 +61,19 @@ namespace KatanaImplementation
 
 
             //});
+
+
             //This statement calls the UseNancy other than /nancy url
-            app.Map("/nancy", mappedApp => { mappedApp.UseNancy(); });
+            //app.Map("/nancy", mappedApp => { mappedApp.UseNancy(); });
             //To Use nancy install-package nancy.owin
             //app.UseNancy();
+
+            //WebApi registration
+            var configuration = new HttpConfiguration();
+            configuration.MapHttpAttributeRoutes();
+
+            app.UseWebApi(configuration);
+
             app.Use(async (ctx, next) =>
             {
                 await ctx.Response.WriteAsync("<html><head></head><body>hello seshu</body><html>");
