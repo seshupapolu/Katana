@@ -74,10 +74,14 @@ namespace KatanaImplementation
 
             app.UseWebApi(configuration);
 
-            app.Use(async (ctx, next) =>
-            {
-                await ctx.Response.WriteAsync("<html><head></head><body>hello seshu</body><html>");
-            });
+           
+
+            //Below code is not required if we passing request to MVC
+            //If any pipepline is prepared with response, then request is not passed to MVC.
+            //app.Use(async (ctx, next) =>
+            //{
+            //    await ctx.Response.WriteAsync("<html><head></head><body>hello seshu</body><html>");
+            //});
 
         }
     }
