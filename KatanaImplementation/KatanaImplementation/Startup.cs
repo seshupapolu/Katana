@@ -20,7 +20,24 @@ namespace KatanaImplementation
             //});
 
             //Below is the alternate for above
-            app.Use<DebugMiddleware>();
+            app.Use<DebugMiddleware>(new DebugMiddlewareOptions()
+            {
+                OnIncomingRequest = (ctx) =>
+                  {
+                      var watch = new Stopwatch();
+                      watch.Start();
+                      ctx.Environment["TimeTook"] = watch;
+                  },
+                OnOutgoingRequest=(ctx)=>
+                {
+                    var watch = ctx.Environment["TimeTook"] as Stopwatch;
+                    watch.Stop();
+                    Debug.WriteLine("TimeTook: " + watch.ElapsedMilliseconds + " ms");
+                    
+                }
+
+
+            });
             app.Use(async (ctx, next) =>
             {
                 await ctx.Response.WriteAsync("<html><head></head><body>hello seshu</body><html>");
