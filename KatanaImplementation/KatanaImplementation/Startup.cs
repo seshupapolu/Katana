@@ -60,8 +60,10 @@ namespace KatanaImplementation
 
 
             //});
-
-            app.UseNancy();
+            //This statement calls the UseNancy other than /nancy url
+            app.Map("/nancy", mappedApp => { mappedApp.UseNancy(); });
+            //To Use nancy install-package nancy.owin
+            //app.UseNancy();
             app.Use(async (ctx, next) =>
             {
                 await ctx.Response.WriteAsync("<html><head></head><body>hello seshu</body><html>");
