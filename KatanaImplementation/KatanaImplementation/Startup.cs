@@ -60,6 +60,8 @@ namespace KatanaImplementation
 
 
             //});
+
+            app.UseNancy();
             app.Use(async (ctx, next) =>
             {
                 await ctx.Response.WriteAsync("<html><head></head><body>hello seshu</body><html>");
