@@ -68,7 +68,7 @@ namespace KatanaImplementation
             //To Use nancy install-package nancy.owin
             //app.UseNancy();
 
-            //WebApi registration
+            //WebApi registration install-package microsoft.aspnet.webapi.owin
             var configuration = new HttpConfiguration();
             configuration.MapHttpAttributeRoutes();
 
