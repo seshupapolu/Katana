@@ -49,6 +49,14 @@ namespace KatanaImplementation
                 LoginPath = new PathString("/Auth/Login")
             });
 
+            app.Use(async (ctx, next) =>
+            {
+                if (ctx.Authentication.User.Identity.IsAuthenticated)
+                    Debug.WriteLine("User: " + ctx.Authentication.User.Identity.Name);
+                else
+                    Debug.WriteLine("user not Authenticated");
+                await next();
+            });
 
             //Below is the alternate for above
             //app.Use<DebugMiddleware>(new DebugMiddlewareOptions()
