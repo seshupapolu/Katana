@@ -6,6 +6,8 @@ using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
+using Microsoft.Owin;
+using Microsoft.Owin.Security.Cookies;
 
 namespace KatanaImplementation
 {
@@ -41,6 +43,12 @@ namespace KatanaImplementation
                   }
             });
 
+            app.UseCookieAuthentication(new CookieAuthenticationOptions()
+            {
+                AuthenticationType = "ApplicationCookie",
+                LoginPath = new PathString("/Auth/Login")
+            });
+
 
             //Below is the alternate for above
             //app.Use<DebugMiddleware>(new DebugMiddlewareOptions()
@@ -74,7 +82,7 @@ namespace KatanaImplementation
 
             app.UseWebApi(configuration);
 
-           
+
 
             //Below code is not required if we passing request to MVC
             //If any pipepline is prepared with response, then request is not passed to MVC.
